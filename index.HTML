@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background: black;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            perspective: 2500px;
+            margin: 0;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .texto {
+            position: absolute;
+            color: #00ffff;
+            font-size: 38px;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            z-index: 1000;
+            text-shadow: 0 0 10px #00ffff,
+                         0 0 20px #00ffff,
+                         0 0 30px #00ffff;
+            animation: brillar 2s ease-in-out infinite;
+            font-weight: bold;
+            letter-spacing: 2px;
+            animation-play-state: paused;  /* Pausa la animación al inicio */
+        }
+
+        @keyframes brillar {
+            0%, 100% { 
+                text-shadow: 0 0 10px #00ffff,
+                            0 0 20px #00ffff;
+            }
+            50% { 
+                text-shadow: 0 0 20px #00ffff,
+                            0 0 30px #00ffff,
+                            0 0 40px #00ffff;
+            }
+        }
+
+        .pista {
+            position: relative;
+            width: 100vw;
+            height: 400px;
+            transform-style: preserve-3d;
+        }
+
+        .corazon {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 60px;
+            height: 60px;
+            border-right: 4px solid #ff3366;
+            border-bottom: 4px solid #ff3366;
+            transform: translate(-50%, -50%) rotate(45deg);
+            animation: moverAdelante 4s linear infinite;
+            filter: drop-shadow(0 0 8px #ff3366);
+            animation-play-state: paused;  /* Pausa la animación al inicio */
+        }
+
+        .corazon::before {
+            content: "";
+            position: absolute;
+            top: -44px;
+            left: -4px;
+            border-left: 4px solid #ff3366;
+            border-top: 4px solid #ff3366;
+            border-right: 4px solid #ff3366;
+            height: 40px;
+            width: 60px;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+        }
+
+        .corazon::after {
+            content: "";
+            position: absolute;
+            top: -4px;
+            left: -40px;
+            border-top: 4px solid #ff3366;
+            border-left: 4px solid #ff3366;
+            border-bottom: 4px solid #ff3366;
+            width: 36px;
+            height: 60px;
+            border-top-left-radius: 40px;
+            border-bottom-left-radius: 40px;
+        }
+
+        .corazon:nth-child(1) { animation-delay: 0s; }
+        .corazon:nth-child(2) { animation-delay: 1s; }
+        .corazon:nth-child(3) { animation-delay: 2s; }
+        .corazon:nth-child(4) { animation-delay: 3s; }
+
+        @keyframes moverAdelante {
+            0% {
+                transform: translate(-50%, -50%) rotate(45deg) scale(0.2) translateZ(-2500px);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(45deg) scale(4) translateZ(1000px);
+                opacity: 0;
+            }
+        }
+
+        /* Estilo de las partículas */
+        .particula-corazon {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: none;
+            border-right: 2px solid #ff3366;
+            border-bottom: 2px solid #ff3366;
+            transform: rotate(45deg);
+            pointer-events: none;
+            filter: drop-shadow(0 0 4px #ff3366);
+        }
+
+        .particula-corazon::before {
+            content: "";
+            position: absolute;
+            top: -14px;
+            left: -2px;
+            border-left: 2px solid #ff3366;
+            border-top: 2px solid #ff3366;
+            border-right: 2px solid #ff3366;
+            height: 14px;
+            width: 20px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        .particula-corazon::after {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -14px;
+            border-top: 2px solid #ff3366;
+            border-left: 2px solid #ff3366;
+            border-bottom: 2px solid #ff3366;
+            width: 14px;
+            height: 20px;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+        }
+
+        /* Estilo de los botones */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: absolute;
+            bottom: 30px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            background-color: #ff3366;
+            color: white;
+            border: none;
+            font-size: 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255, 51, 102, 0.8);
+        }
+
+        .btn:hover {
+            background-color: #ff6699;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 51, 102, 0.8);
+        }
+
+        .btn:active {
+            transform: translateY(2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="texto">AMOR TE AMO😘🥰</div>
+    <div class="pista">
+        <div class="corazon"></div>
+        <div class="corazon"></div>
+        <div class="corazon"></div>
+        <div class="corazon"></div>
+    </div>
+
+    <!-- Contenedor de los botones -->
+    <div class="btn-container">
+        <button class="btn" onclick="reproducirAudio()">Reproducir Audio</button>
+        <button class="btn" onclick="pausarAudio()">Pausar Audio</button>
+    </div>
+
+    <!-- Elemento de audio -->
+    <audio id="audio" src="mp3/yoel.mp3" preload="auto">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <script>
+        function crearParticulasCorazon() {
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            
+            for (let i = 0; i < 20; i++) {
+                const particula = document.createElement('div');
+                particula.classList.add('particula-corazon');
+                
+                particula.style.left = centerX + 'px';
+                particula.style.top = centerY + 'px';
+                
+                const angle = (Math.random() * Math.PI * 2);
+                const distance = Math.random() * 400 + 200; // Aumentado el rango de distancia
+                
+                const endX = centerX + Math.cos(angle) * distance;
+                const endY = centerY + Math.sin(angle) * distance;
+                
+                const animation = particula.animate([{
+                        left: centerX + 'px',
+                        top: centerY + 'px',
+                        transform: 'rotate(45deg) scale(1.5)',
+                        opacity: 1
+                    },
+                    {
+                        left: endX + 'px',
+                        top: endY + 'px',
+                        transform: 'rotate(45deg) scale(0.2)',
+                        opacity: 0
+                    }
+                ], {
+                    duration: 2000,
+                    easing: 'cubic-bezier(0.25, 0.1, 0.25, 1)',
+                    fill: 'forwards'
+                });
+                
+                document.body.appendChild(particula);
+                
+                animation.onfinish = () => {
+                    document.body.removeChild(particula);
+                };
+            }
+        }
+        function reproducirAudio() {
+            var audio = document.getElementById('audio');
+            audio.play();  // Reproduce el audio cuando el usuario hace clic en el botón
+
+            // Reanudar animaciones
+            document.querySelectorAll('.texto').forEach(el => el.style.animationPlayState = 'running');
+            document.querySelectorAll('.corazon').forEach(el => el.style.animationPlayState = 'running');
+        }
+
+        function pausarAudio() {
+            var audio = document.getElementById('audio');
+            audio.pause();  // Pausa el audio cuando el usuario hace clic en el botón
+
+            // Pausar animaciones
+            document.querySelectorAll('.texto').forEach(el => el.style.animationPlayState = 'paused');
+            document.querySelectorAll('.corazon').forEach(el => el.style.animationPlayState = 'paused');
+        }
+
+        // Crear partículas de corazón desde el inicio
+        setInterval(crearParticulasCorazon, 2000);
+        crearParticulasCorazon();
+    </script>
+</body>
+</html>
+
